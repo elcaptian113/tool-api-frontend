@@ -1,23 +1,32 @@
-import logo from './logo.svg';
 import './App.css';
+import React from 'react';
+
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
+import AddTools from './pages/AddTools';
+import ViewTools from './pages/ViewTools';
+import UpdateTool from './pages/UpdateTool';
+import DeleteTool from './pages/DeleteTool';
+import UpdatePage from './pages/Update';
+
+import NavigationBar from './components/navigation/NavigationBar';
+
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Router>
+        <NavigationBar />
+        <Routes>
+          <Route index element={<ViewTools />} />
+          <Route path="add" element={<AddTools />} />
+          <Route path="updatePage" element={<UpdatePage />} />
+          <Route path="update">
+            <Route path=":toolId" element={<UpdateTool />} />
+          </Route>
+          <Route path="delete" element={<DeleteTool />} />
+        </Routes>
+      </Router>
     </div>
   );
 }
